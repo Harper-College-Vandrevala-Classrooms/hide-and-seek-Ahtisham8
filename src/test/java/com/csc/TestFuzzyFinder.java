@@ -18,15 +18,28 @@ public class TestFuzzyFinder {
     generator = new FuzzyListGenerator();
   }
 
+
   @Test
-  void exampleFailingTestWithRandomizedFuzzies() {
-    ArrayList<Fuzzy> fuzzies = generator.randomizedRainbowFuzzies();
-    assertEquals("purple", fuzzies.getFirst().color);
+  void testForGoldAtIndexThousand() {
+    ArrayList<Fuzzy> fuzzies = generator.sortedRainbowFuzzies();
+    assertEquals("gold", fuzzies.get(7000).color);
   }
 
   @Test
-  void exampleFailingTestWithSortedFuzzies() {
-    ArrayList<Fuzzy> fuzzies = generator.sortedRainbowFuzzies();
-    assertEquals("purple", fuzzies.getFirst().color);
+  void testLinearForSorted() {
+    ArrayList<Fuzzy> sortedFuzzies = generator.sortedRainbowFuzzies();
+    assertEquals(7000, finder.linearSearch(sortedFuzzies));
+  }
+
+  @Test
+  void testBinaryForSorted() {
+    ArrayList<Fuzzy> sortedFuzzies = generator.sortedRainbowFuzzies();
+    assertEquals(7000, finder.binarySearch(sortedFuzzies));
+  }
+
+  @Test
+  void failureInBinaryForRandomFuzzies() {
+    ArrayList<Fuzzy> randomFuzzies = generator.randomizedRainbowFuzzies();
+    assertEquals(-1, finder.binarySearch(randomFuzzies));
   }
 }

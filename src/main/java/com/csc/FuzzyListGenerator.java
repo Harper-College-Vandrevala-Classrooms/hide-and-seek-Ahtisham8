@@ -9,7 +9,7 @@ public class FuzzyListGenerator {
   int iterations;
 
   public FuzzyListGenerator() {
-    this.iterations = 1000;
+    this.iterations = 7000;
   }
 
   public FuzzyListGenerator(int iterations) {
